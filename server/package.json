@@ -1,12 +1,16 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is the server side for React JS.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
   },
+  "keywords": [
+    "Server",
+    "NodeJS"
+  ],
   "author": "Shubhangi",
   "license": "ISC",
   "dependencies": {
