@@ -23,8 +23,6 @@ app.get("/login", (req, res) => {
   }
 });
 app.post("/login", (req, res) => {
-  console.log(req.body.username);
-  console.log(req.body.password);
   const matchedUser = {
     ...users.find(
       user =>
@@ -36,10 +34,9 @@ app.post("/login", (req, res) => {
     delete matchedUser.password;
     req.session.User = matchedUser;
     res.json(matchedUser);
+    //res.json("User logged in successfully");
   } else {
     delete req.session.User;
-    console.log(req.body.username);
-    console.log(req.body.password);
     res.status(401).json("Username or password is wrong.");
   }
 });
