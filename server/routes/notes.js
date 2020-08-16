@@ -1,10 +1,17 @@
 const express = require("express");
-//const { timeStamp } = require("console");
-//const { title } = require("process");
 const app = express.Router();
+const fs = require("fs");
 
-//Created the notes database
-const notes = [];
+//Creat storge dir if it doe'nt exist
+if (!fs.existsSync(__dirname + "/../storage"))
+  fs.mkdirSync(
+    __dirname + "/../storage");
+
+//Create storage file if it does'nt exist
+if (!fs.existsSync(__dirname + "/../storage/notes.json"))
+  fs.writeFileSync(
+    __dirname + "/../storage/notes.json", "[]");
+const notes = require("../storage/notes.json");
 
 //work with notes only if user is logged in
 app.use((req, res, next) => {
@@ -26,8 +33,6 @@ app.get("/", (req, res) => {
     )
   );
 })
-
-
 
 //Create a new note.
 app.post("/", (req, res) => {
@@ -61,7 +66,7 @@ app.post("/", (req, res) => {
   }
 });
 
-//View users notes.
+//View users own notes.
 app.get("/me", (req, res) => {
   res.json(notes.filter(note => note.username === req.session.User.username));
 })
@@ -79,6 +84,62 @@ app.get("/:noteId", (req, res) => {
     res.status(403).json("You don't have access to this note.");
   } else {
     res.json(notes[noteId]);
+  }
+});
+//Update a particular note.
+app.post("/:noteId", (req, res) => {
+  const noteId = +req.params.noteId;
+  if (!notes[noteId] || !notes[noteId].username) {
+    res.status(404).json("Note doesn't exist.");
+  } else if (notes[noteId].username !== req.session.User.username) {
+    // Don't give access to others' notes!
+    res.status(403).json("You don't have access to edit or delete this note.");
+  } else {
+    let note = notes[noteId];
+    if (
+      req.body.title &&
+      req.body.title.trim().length > 3 &&
+      req.body.content &&
+      req.body.content.trim().length > 3 &&
+      typeof req.body.private === "boolean"
+    ) {
+      const { title, content, private } = req.body;
+      const editCount = note.editCount + 1,
+        updatedAt = new Date();
+      // Update the particular note.
+      notes[noteId] = {
+        ...note,
+        title,
+        content,
+        private,
+        editCount,
+        updatedAt
+      };
+      res.json(`Updated note #${noteId} successfully.`);
+    } else {
+      res.status(400).json("Sorry, you need both title and content.");
+    }
+  }
+});
+// Delete particular note.
+app.delete("/:noteId", (req, res) => {
+  const noteId = +req.params.noteId;
+  if (!notes[noteId] || !notes[noteId].username) {
+    res.status(404).json("Note doesn't exist.");
+  } else if (notes[noteId].username !== req.session.User.username) {
+    //Access to others' notes not provide!
+    res.status(403).json("You don't have access to delete this note.");
+  } else {
+    notes[noteId] = {
+      username: null,
+      title: null,
+      content: null,
+      private: true,
+      editCount: null,
+      createdAt: null,
+      updatedAt: new Date()
+    };
+    res.json(`Note #${noteId} successfully deleted.`);
   }
 });
 
