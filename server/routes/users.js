@@ -96,7 +96,7 @@ app.get("/:index", (req, res) => {
     res.status(404).json("User doesn't exist.");
   } else {
     if (!req.session.User) {
-      res.status(401).json("You need to login to work with users!");
+      res.status(401).json("You need to login to work with users");
     } else {
       const user = { ...users[req.params.index] };
       delete user.password;

@@ -5,16 +5,17 @@ import Login from './Login/Login'
 
 class App extends Component {
   state = {
-    LoggedIn: false,
-    Error: false
+    LoggedIn: true,
+    Error: true
   };
   handelAuthentication = (formData) => {
     const { username, password } = formData;
-    alert(`Username: ${username} Password ${password}`);
     if (username === password) {
       this.setState({ LoggedIn: formData, Error: false })
+      alert(`Username: ${username} Password ${password}`);
     } else {
       this.setState({ LoggedIn: false, Error: true })
+      // alert(`Username: ${username} Password ${password}`);
     }
   }
   render() {
