@@ -25,12 +25,18 @@ class App extends Component {
       });
   };
 
+  handelLogout = () => {
+    this.setState({
+      LoggedIn: false,
+      Error: false
+    });
+  }
   render() {
     return (
       <div className='App'>
         <Header dark={true}>Leadstagram1</Header>
         {this.state.LoggedIn ? (
-          <Notes LoggedIn={this.state.LoggedIn} />
+          <Notes LoggedIn={this.state.LoggedIn} Logout={this.handelLogout} />
         ) : (
             <Login handelAuthentication={this.handelAuthentication}
               Error={this.state.Error}
