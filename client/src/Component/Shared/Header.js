@@ -3,7 +3,6 @@ import React from 'react';
 
 const Header = ({ dark, children, className, pages }) => {
   dark = !!dark ? 'dark' : 'light';
-  console.log(dark);
   return (
     <nav className={`Header navbar navbar-${dark} bg-${dark}` + (className ? ' ' + className : '')}>
       <span className='navbar-brand'>{children}</span>
