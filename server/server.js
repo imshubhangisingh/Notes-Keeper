@@ -10,7 +10,7 @@ const session = require("express-session");
 const app = express();
 
 //Defining a part for Express App to listen to.
-const port = 3000;
+const port = 3100;
 
 //get routes.
 const users = require("./routes/users");
@@ -32,8 +32,8 @@ app.use(
 
 //Use the routes.
 app.use("/", root);
-app.use("/users", users);
-app.use("/notes", notes);
+app.use("/api/users", users);
+app.use("/api/notes", notes);
 
 app.listen(port, () => {
   console.log("Successfully started the server on port " + port);
