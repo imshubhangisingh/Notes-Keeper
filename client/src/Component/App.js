@@ -10,6 +10,7 @@ class App extends Component {
     return (
       <div className='App'>
         <Header dark={true}>Leadstagram1</Header>
+        {this.state.LoggedIn ? <p>Show Notes</p> : <p>Show Login</p>}
       </div>
     );
   }
