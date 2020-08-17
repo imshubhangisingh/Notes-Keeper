@@ -3,6 +3,9 @@ import Header from './Shared/Header.js';
 
 
 class App extends Component {
+  state = {
+    LoggedIn: false
+  };
   render() {
     return (
       <div className='App'>
