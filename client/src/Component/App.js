@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from './Shared/Header.js';
 import Login from './Login/Login'
 import Notes from "./Notes/Notes"
-import { AuthenticateUser } from '../Services/AuthServices.js';
+import { AuthenticateUser, LogoutUser } from '../Services/AuthServices.js';
 
 
 class App extends Component {
@@ -26,10 +26,14 @@ class App extends Component {
   };
 
   handelLogout = () => {
-    this.setState({
-      LoggedIn: false,
-      Error: false
-    });
+    LogoutUser().then(res => {
+      if (res.data === "User successfully logged out.")
+        this.setState({
+          LoggedIn: false,
+          Error: false
+        });
+    })
+
   }
   render() {
     return (
