@@ -1,28 +1,41 @@
 import React, { Component } from 'react';
 import Header from './Shared/Header.js';
 import Login from './Login/Login'
+import Notes from "./Notes/Notes"
+import { AuthenticateUser } from '../Services/AuthServices.js';
 
 
 class App extends Component {
   state = {
-    LoggedIn: true,
-    Error: true
+    LoggedIn: false,
+    Error: false
   };
-  handelAuthentication = (formData) => {
-    const { username, password } = formData;
-    if (username === password) {
-      this.setState({ LoggedIn: formData, Error: false })
-      alert(`Username: ${username} Password ${password}`);
-    } else {
-      this.setState({ LoggedIn: false, Error: true })
-      // alert(`Username: ${username} Password ${password}`);
-    }
-  }
+  handelAuthentication = cred => {
+    AuthenticateUser(cred)
+      .then(res => {
+        this.setState({
+          LoggedIn: res.data,
+          Error: false
+        });
+      }).catch(() => {
+        this.setState({
+          LoggedIn: false,
+          Error: true
+        });
+      });
+  };
+
   render() {
     return (
       <div className='App'>
         <Header dark={true}>Leadstagram1</Header>
-        {this.state.LoggedIn ? <Login handelAuthentication={this.handelAuthentication} Error={this.state.Error} /> : <p>Show Notes</p>}
+        {this.state.LoggedIn ? (
+          <Notes LoggedIn={this.state.LoggedIn} />
+        ) : (
+            <Login handelAuthentication={this.handelAuthentication}
+              Error={this.state.Error}
+            />
+          )}
       </div>
     );
   }

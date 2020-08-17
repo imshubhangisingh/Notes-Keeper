@@ -26,7 +26,7 @@ const Login = ({ handelAuthentication, Error }) => {
             <h5 className="card-header">Sign-In</h5>
             <div className="card-body">
               <form onSubmit={handelSubmit}>
-                {!Error && (
+                {Error && (
                   <div className="alert alert-danger">Username or password is wrong!</div>
                 )}
                 {[
