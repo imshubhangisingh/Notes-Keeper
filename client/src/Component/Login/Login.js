@@ -1,7 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import FormGroup from '../Form/FormGroup'
 
 const Login = () => {
+  //we use useState(Hook) to grab the valuet of the content on change, used this for making it a controled data, so withou this if we go back and try to change the state it won't change
+  const [FormData, setFormData] = useState({
+    username: "",
+    password: ""
+  });
+
+  const handelChange = e => {
+    setFormData({
+      ...FormData,
+      [e.target.name]: e.target.value
+    });
+  };
   return (
     <div className="container my-5">
       <div className="row">
@@ -15,11 +27,15 @@ const Login = () => {
                     Id: "username",
                     Label: "Username",
                     Type: "text",
+                    onChange: handelChange,
+                    value: FormData.username
                   },
                   {
                     Id: "password",
-                    Label: "password",
+                    Label: "Password",
                     Type: "password",
+                    onChange: handelChange,
+                    value: FormData.password
                   }
                 ].map((fg, key) => (
                   <FormGroup {...fg} key={key} />

@@ -16,7 +16,7 @@ const FormGroup = ({
       <label htmlFor={Id}>{Label}</label>
       <input type={Type} className="form-control"
         id={Id}
-        Name={Id}
+        name={Id}
         onChange={onChange}
         value={Value}
         defaultValue={defaultValue}
