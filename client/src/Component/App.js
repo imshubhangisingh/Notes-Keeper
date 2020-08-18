@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from './Shared/Header.js';
 import Login from './Login/Login'
 import Notes from "./Notes/Notes"
-import { AuthenticateUser, LogoutUser } from '../Services/AuthServices.js';
+import { AuthenticateUser, LogoutUser, GetActiveUser } from '../Services/AuthServices.js';
 
 
 class App extends Component {
@@ -38,6 +38,16 @@ class App extends Component {
         });
     });
   };
+  //avoid users from getting logged out on refresh
+  componentDidMount() {
+    GetActiveUser().then(res => {
+      if (res.status === 200) {
+        this.setState({
+          LoggedIn: res.data
+        });
+      }
+    })
+  }
   render() {
     return (
       <div className='App'>
