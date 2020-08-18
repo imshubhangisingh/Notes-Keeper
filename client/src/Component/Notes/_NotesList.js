@@ -1,15 +1,22 @@
-import React from 'react'
+import Reacts from 'react'
+import { Link } from "react-router-dom";
 
 const NotesList = ({ Notes }) => {
+
+  const urm = useRouteMatch();
   return (
     <div className="list-group">
       {Notes.map &&
         Notes.map((note, key) => (
-          <span className="list-group-item list-group-item-action" key={key}>
+          <Link to={"/note" + key}
+            className="list-group-item list-group-item-action"
+            key={key}
+          >
             {note.title}
-          </span>
+          </Link>
         ))}
     </div>
+
   );
 }
 
