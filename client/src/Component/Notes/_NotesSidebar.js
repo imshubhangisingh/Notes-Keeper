@@ -7,7 +7,9 @@ const NotesSidebar = ({ Notes }) => {
       {Notes && Notes.length > 0 ? (
         <NotesList Notes={Notes} />
       ) : (
-          <div className="alert alert-info">No notes found. Please create one.</div>
+          <div className="alert alert-info">
+            No notes found. Please create one.
+          </div>
         )}
     </div>
   )

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { GetAllNotes } from "../../Services/NotesService.js"
 import WelcomeHeader from './_WelcomeHeader.js';
 import NotesSidebar from './_NotesSidebar.js';
@@ -27,10 +28,16 @@ class Notes extends Component {
               <WelcomeHeader LoggedIn={LoggedIn} Logout={Logout} />
               <div className="card-body">
                 <div className="row">
-                  <NotesSidebar Notes={this.state.Notes} />
-                  <NotesContainer />
-                </div>
 
+                  <Router>
+                    <Switch>
+                      <Route path={["/:NoteID", "/"]} exact={true}>
+                        <NotesSidebar Notes={this.state.Notes} />
+                        <NotesContainer />
+                      </Route>
+                    </Switch>
+                  </Router>
+                </div>
               </div>
             </div>
           </div>
