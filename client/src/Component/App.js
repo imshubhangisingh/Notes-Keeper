@@ -3,6 +3,7 @@ import Header from './Shared/Header.js';
 import Login from './Login/Login'
 import Notes from "./Notes/Notes"
 import { AuthenticateUser, LogoutUser, GetActiveUser } from '../Services/AuthServices.js';
+import Loading from './Shared/Loading'
 
 
 class App extends Component {
@@ -45,22 +46,29 @@ class App extends Component {
         this.setState({
           LoggedIn: res.data
         });
-      }
-    })
+      }//below function is to avoid the flash of login screen while logging in
+    }).catch(() => { }).then(() => {
+      this.setState({
+        Loaded: true
+      })
+    });
   }
   render() {
     return (
       <div className='App'>
         <Header dark={true}>Keeper</Header>
-        {this.state.LoggedIn ? (
-          <Notes LoggedIn={this.state.LoggedIn} Logout={this.handelLogout} />
-        ) : (
-            <Login
-              handelAuthentication={this.handelAuthentication}
-              Error={this.state.Error}
-              Success={this.state.Success}
-            />
-          )}
+        {this.state.Loaded ? (
+          <>
+            {this.state.LoggedIn ? (
+              <Notes LoggedIn={this.state.LoggedIn} Logout={this.handelLogout} />
+            ) : (
+                <Login
+                  handelAuthentication={this.handelAuthentication}
+                  Error={this.state.Error}
+                  Success={this.state.Success}
+                />
+              )}
+          </>) : <Loading />}
       </div>
     );
   }
