@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express.Router();
-
+const fs = require("fs");
 //Fetch users database and create storage dir if it does'nt exist
 if (!fs.existsSync(__dirname + "/../storage"))
   fs.mkdirSync(
