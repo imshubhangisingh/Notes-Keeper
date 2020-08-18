@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { GetAllNotes } from "../../Services/NotesService.js"
+import WelcomeHeader from './_WelcomeHeader.js';
+import NotesSidebar from './_NotesSidebar.js';
+import NotesContainer from './_NotesContainer.js';
 
 class Notes extends Component {
   state = {
@@ -17,25 +20,15 @@ class Notes extends Component {
   render() {
     const { LoggedIn, Logout } = this.props;
     return (
-      <div className="container-fluid my-5">
+      <div className="container-fluid my-2">
         <div className="row">
           <div className="col-12">
             <div className="card">
-              <h5 className="card-header">
-                <span className="align-middle d-inline-block mt-1">
-                  Welcome, {LoggedIn.fullname}!
-              </span>
-                <button className="btn btn-danger btn-sm float-right" onClick={Logout}>Logout
-            </button>
-              </h5>
+              <WelcomeHeader LoggedIn={LoggedIn} Logout={Logout} />
               <div className="card-body">
                 <div className="row">
-                  <div className="col-2">
-                    <p>List all Notes</p>
-                  </div>
-                  <div className="col-10">
-                    <pre>{JSON.stringify(LoggedIn, null, 2)}</pre>
-                  </div>
+                  <NotesSidebar Notes={this.state.Notes} />
+                  <NotesContainer />
                 </div>
 
               </div>
