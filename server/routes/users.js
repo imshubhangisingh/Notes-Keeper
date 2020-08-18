@@ -35,8 +35,7 @@ app.post("/", (req, res) => {
 });
 
 //Users login
-app.get("/login", async (req, res) => {
-  await new Promise(done => setTimeout(() => done(), 2500));
+app.get("/login", (req, res) => {
   if (!req.session.User) {
     res.status(405).json("GET requests not supported.");
   } else {
