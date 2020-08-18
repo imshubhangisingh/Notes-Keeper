@@ -4,7 +4,7 @@ import { RegisterUser } from '../../Services/AuthServices';
 import LoginForm from './_Login'
 import RegisterForm from './_Register';
 
-const Login = ({ handelAuthentication, Error }) => {
+const Login = ({ handelAuthentication, Error, Success }) => {
   //we use useState(Hook) to grab the valuet of the content on change, used this for making it a controled data, so withou this if we go back and try to change the state it won't change
   const [RegError, setRegError] = useState(false);
   const [RegSuccess, setRegSuccess] = useState(false);
@@ -54,6 +54,7 @@ const Login = ({ handelAuthentication, Error }) => {
         <div className="col-12 col-md-6">
           <LoginForm {...{
             Error,
+            Success,
             handelLogin,
             handelLoginData,
             LoginData,
