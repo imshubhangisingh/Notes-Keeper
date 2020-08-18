@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import FormGroup from '../Form/FormGroup'
+import { RegisterUser } from '../../Services/AuthServices';
 
 const Login = ({ handelAuthentication, Error }) => {
   //we use useState(Hook) to grab the valuet of the content on change, used this for making it a controled data, so withou this if we go back and try to change the state it won't change
+  const [RegError, setRegError] = useState(false);
+  const [RegSuccess, setRegSuccess] = useState(false);
   const [LoginData, setLoginData] = useState({
     username: "",
     password: ""
@@ -26,12 +29,21 @@ const Login = ({ handelAuthentication, Error }) => {
   };
 
   const handelLogin = e => {
-    e.preventDefault(); // this resist the page from getting reloaded on clicking submit
+    e.preventDefault();
     handelAuthentication({ ...LoginData }); //on submit this is passing the the Form data to handelAuthentication func
   }
 
   const handelRegister = e => {
     e.preventDefault();
+    RegisterUser(RegisterData).then(res => {
+      if (res.status === 201) {
+        setRegSuccess(res.data);
+        setRegError(false);
+      }
+    }).catch(err => {
+      setRegSuccess(false);
+      setRegError(err.response.data);
+    })
   }
 
   return (
@@ -43,7 +55,7 @@ const Login = ({ handelAuthentication, Error }) => {
             <div className="card-body">
               <form onSubmit={handelLogin}>
                 {Error && (
-                  <div className="alert alert-danger">Username or password is wrong!</div>
+                  <div className="alert alert-danger text-center">Username or password is wrong!</div>
                 )}
                 {[
                   {
@@ -78,8 +90,11 @@ const Login = ({ handelAuthentication, Error }) => {
             <h5 className="card-header">Register</h5>
             <div className="card-body">
               <form onSubmit={handelRegister}>
-                {Error && (
-                  <div className="alert alert-danger">Username already exists!</div>
+                {RegError && (
+                  <div className="alert alert-danger text-center">{RegError}</div>
+                )}
+                {RegSuccess && (
+                  <div className="alert alert-success text-center">{RegSuccess}</div>
                 )}
                 {[
                   {
@@ -116,7 +131,7 @@ const Login = ({ handelAuthentication, Error }) => {
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 }
 
