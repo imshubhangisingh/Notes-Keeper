@@ -10,14 +10,14 @@ const NoteContent = ({ Note }) => {
       <header>
         <h3>{Note.title}</h3>
         <div className="Author">
-          <p>Written by <em>{Note.username}</em> on <em>{Moment(Note.createdAt).format("MMMM Do YYYY, h:mm:ss a")}</em>.
+          <p>Written by <em>{Note.username}</em> on <em>{Moment(Note.createdAt).format("MMMM Do YYYY, h:mm a")}</em>.
           <br></br>
             {Note.editCount > 0 ? (
               <>
                 {" "}
             Last updated on {" "}
                 <em>
-                  {Moment(Note.updatedAt).format("MMMM Do YYYY, h:mm:ss a")}
+                  {Moment(Note.updatedAt).format("MMMM Do YYYY, h:mm a")}
                 </em>
             . This note was edited <em>{Note.editCount}</em> time
             {Note.editCount === 1 ? "" : "s"}.
