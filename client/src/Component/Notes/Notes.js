@@ -7,7 +7,8 @@ import NotesContainer from './_NotesContainer.js';
 
 class Notes extends Component {
   state = {
-    Notes: []
+    Notes: [],
+    Deleted: false
   };
   componentDidMount() {
     GetAllNotes().then(res => {
@@ -24,7 +25,8 @@ class Notes extends Component {
         GetAllNotes().then(res => {
           if (res.status === 200) {
             this.setState({
-              Notes: res.data
+              Notes: res.data,
+              Deleted: true
             });
           }
         });
@@ -54,6 +56,7 @@ class Notes extends Component {
                           Notes={this.state.Notes}
                           DelNote={this.DeleteNote}
                           LoggedIn={LoggedIn}
+                          Deleted={this.state.Deleted}
                         />
                       </Route>
                     </Switch>
