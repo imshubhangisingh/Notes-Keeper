@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import Header from './Shared/Header.js';
+import Header from "./Shared/Header";
 import Login from './Login/Login'
 import Notes from "./Notes/Notes"
 import { AuthenticateUser, LogoutUser, GetActiveUser } from '../Services/AuthServices.js';
 import Loading from './Shared/Loading'
+// import {DeleteNote} from "../../Services/NoteService";
 
 
 class App extends Component {
@@ -56,7 +57,7 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
-        <Header dark={true}>Keeper</Header>
+        <Header dark={true} />
         {this.state.Loaded ? (
           <>
             {this.state.LoggedIn ? (
