@@ -11,7 +11,10 @@ if (!fs.existsSync(__dirname + "/../storage"))
 if (!fs.existsSync(__dirname + "/../storage/notes.json"))
   fs.writeFileSync(
     __dirname + "/../storage/notes.json", "[]");
-const notes = require("../storage/notes.json");
+const notes = require("../storage/notes.json").map((note, NoteID) => ({
+  ...note,
+  NoteID
+}));
 
 //work with notes only if user is logged in
 app.use((req, res, next) => {
