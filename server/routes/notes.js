@@ -142,7 +142,7 @@ app.delete("/:noteId", (req, res) => {
     // Don't give access to others' notes!
     res.status(403).json("You don't have access to edit or delete this note.");
   } else {
-    GetNoteById(noteId) = {
+    notes[noteId] = {
       username: null,
       title: null,
       content: null,
