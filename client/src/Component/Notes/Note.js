@@ -2,15 +2,23 @@ import React from 'react';
 import Moment from "moment";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
+// import { DeleteNote } from '../../Services/NotesService';
+
 
 const NoteContent = ({ Note }) => {
-
-  console.log(Note);
+  // const handelDelete = e => {
+  //   e.preventDefault();
+  //   DeleteNote(Note.)
+  // }
   return (
     <section
       className={"NotesContainer-Content" + (Note.private ? " private" : "")}>
       <header>
-        <h3>{Note.title}</h3>
+        <h3>
+          {Note.title}
+          <button className="btn btn-sm btn-danger float-right">Delete</button>
+
+        </h3>
         <div className="Author">
           <p>Written by <em>{Note.username}</em> on <em>{Moment(Note.createdAt).format("MMMM Do YYYY, h:mm a")}</em>.
           <br></br>
