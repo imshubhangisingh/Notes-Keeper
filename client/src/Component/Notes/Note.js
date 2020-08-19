@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 // import { DeleteNote } from '../../Services/NotesService';
 
 
-const NoteContent = ({ Note, DelNote }) => {
+const NoteContent = ({ Note, DelNote, LoggedIn }) => {
   const handelDelete = e => {
     e.preventDefault();
     DelNote(Note.noteid);
@@ -16,10 +16,12 @@ const NoteContent = ({ Note, DelNote }) => {
       <header>
         <h3>
           {Note.title}
-          <button className="btn btn-sm btn-danger float-right" onClick={handelDelete}
-          >
-            Delete
-          </button>
+          {Note.username === LoggedIn.username && (
+            <button
+              className="btn btn-sm btn-danger float-right" onClick={handelDelete}
+            >
+              Delete
+            </button>)}
 
         </h3>
         <div className="Author">
