@@ -7,7 +7,10 @@ const NotesContainer = ({ Notes }) => {
   const urm = useRouteMatch();
   const isHome = urm.path === "/";
 
-  const Note = !isHome ? Notes[+urm.params.NoteID.replace("note-", "")] : null;
+  const Note = !isHome ? Notes.find(
+    note => note.noteid === +urm.params.NoteID.replace("note-", "")
+  )
+    : null;
 
   return (
     <div className="col-10">
