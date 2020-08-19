@@ -5,9 +5,13 @@ const WelcomeHeader = ({ LoggedIn, Logout }) => {
     <h5 className="card-header">
       <span className="align-middle d-inline-block mt-1">
         Welcome, {LoggedIn.fullname}!
-              </span>
-      <button className="btn btn-danger btn-sm float-right" onClick={Logout}>Logout
-            </button>
+        </span>
+
+      <div className="btn-group float-right">
+        <button className="btn btn-success btn-sm">New Note</button>
+        <button className="btn btn-danger btn-sm " onClick={Logout}>Logout
+      </button>
+      </div>
     </h5>
   )
 }
