@@ -37,7 +37,7 @@ class Notes extends Component {
                           LoggedIn={LoggedIn}
 
                         />
-                        <NotesContainer />
+                        <NotesContainer Notes={this.state.Notes} />
                       </Route>
                     </Switch>
                   </Router>
