@@ -1,22 +1,50 @@
-import Reacts from 'react'
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useRouteMatch } from "react-router-dom";
 
-const NotesList = ({ Notes }) => {
-
+const NotesList = ({ Notes, LoggedIn }) => {
+  const [Mine, setMine] = useState(false);
   const urm = useRouteMatch();
+  Notes =
+    Notes.filter &&
+    Notes.filter(note => (Mine ? note.username === LoggedIn.username : true));
   return (
-    <div className="list-group">
-      {Notes.map &&
-        Notes.map((note, key) => (
-          <Link to={"/note" + key}
+    <>
+      <div className="btn-group mb-3 mr-2">
+        <button
+          className={"btn btn-sm btn-primary" + (Mine ? "" : " active")}
+          onClick={e => {
+            e.preventDefault();
+            setMine(false);
+          }}
+        >
+          Home
+        </button>
+        <button
+          className={"btn btn-sm btn-primary" + (Mine ? " active" : "")}
+          onClick={e => {
+            e.preventDefault();
+            setMine(true);
+          }}
+        >
+          My Notes
+        </button>
+      </div>
+      <div className="list-group">
+        {Notes.length > 0 ? Notes.map((note, key) => (
+          <Link
+            to={"/note-" + note.NoteID}
             className="list-group-item list-group-item-action"
             key={key}
           >
             {note.title}
           </Link>
-        ))}
-    </div>
-
+        )) : (
+            <div className="alert alert-info">
+              You haven't created any notes yet. Please create one.
+            </div>
+          )}
+      </div>
+    </>
   );
 }
 
