@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from "react-router-dom";
 
 const NoteContent = ({ Note }) => {
   return (
@@ -16,6 +17,10 @@ const NoteContent = ({ Note }) => {
       <article className="border rounded p-3 bg-light">
         {Note.content}
       </article>
+      <Link
+        to="/" className="btn btn-sm btn-info mt-3">
+        Back to Home
+      </Link>
     </div>
   )
 }
