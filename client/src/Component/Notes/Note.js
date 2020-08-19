@@ -5,23 +5,25 @@ import { Link } from "react-router-dom";
 // import { DeleteNote } from '../../Services/NotesService';
 
 
-const NoteContent = ({ Note }) => {
-  // const handelDelete = e => {
-  //   e.preventDefault();
-  //   DeleteNote(Note.)
-  // }
+const NoteContent = ({ Note, DelNote }) => {
+  const handelDelete = e => {
+    e.preventDefault();
+    DelNote(Note.noteid);
+  };
   return (
     <section
       className={"NotesContainer-Content" + (Note.private ? " private" : "")}>
       <header>
         <h3>
           {Note.title}
-          <button className="btn btn-sm btn-danger float-right">Delete</button>
+          <button className="btn btn-sm btn-danger float-right" onClick={handelDelete}
+          >
+            Delete
+          </button>
 
         </h3>
         <div className="Author">
           <p>Written by <em>{Note.username}</em> on <em>{Moment(Note.createdAt).format("MMMM Do YYYY, h:mm a")}</em>.
-          <br></br>
             {Note.editCount > 0 ? (
               <>
                 {" "}
