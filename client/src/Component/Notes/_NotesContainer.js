@@ -11,12 +11,7 @@ const NotesContainer = ({ Notes }) => {
 
   return (
     <div className="col-10">
-      {isHome ? (
-        <NotesHome />
-      ) : (
-          <NoteContent Note={Note} />
-        )
-      }
+      {!isHome && Note ? <NoteContent Note={Note} /> : <NotesHome />}
     </div>
   )
 }
