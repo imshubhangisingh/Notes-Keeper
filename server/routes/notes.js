@@ -16,7 +16,7 @@ const notes = require("../storage/notes.json").map((note, noteid) => ({
   noteid
 }));
 
-const GetNoteById = NoteID => note.find(note => note.noteid === +NoteID);
+const GetNoteById = NoteID => notes.find(note => note.noteid === +NoteID);
 
 
 
