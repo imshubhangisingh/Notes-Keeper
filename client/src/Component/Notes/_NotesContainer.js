@@ -20,9 +20,11 @@ const NotesContainer = ({ Notes, DelNote, LoggedIn }) => {
           Note={Note}
           LoggedIn={LoggedIn}
         />
+      ) : isHome ? (
+        <NotesHome />
       ) : (
-          <NotesHome />
-        )}
+            <NotesHome is404={true} />
+          )};
     </div>
   )
 }
