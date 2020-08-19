@@ -1,13 +1,22 @@
 import React from 'react';
 import { useRouteMatch } from "react-router-dom";
+import NotesHome from './_NotesHome';
+import NoteContent from './Note';
 
 const NotesContainer = ({ Notes }) => {
   const urm = useRouteMatch();
+  const isHome = urm.path === "/";
+
+  const Note = !isHome ? Notes[+urm.params.NoteID.replace("note-", "")] : null;
+
   return (
-    <div className="col-10 p-3">
-      <pre className="border rounded bg-light">
-        {JSON.stringify({ Note: Notes[+urm?.params?.NoteID?.replace("note-", "")], urm }, null, 2)}
-      </pre>
+    <div className="col-10">
+      {isHome ? (
+        <NotesHome />
+      ) : (
+          <NoteContent Note={Note} />
+        )
+      }
     </div>
   )
 }
