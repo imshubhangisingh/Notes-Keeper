@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { GetAllNotes } from "../../Services/NotesService.js"
 import WelcomeHeader from './_WelcomeHeader.js';
 import NotesSidebar from './_NotesSidebar.js';
@@ -32,7 +32,11 @@ class Notes extends Component {
                   <Router>
                     <Switch>
                       <Route path={["/:NoteID", "/"]} exact={true}>
-                        <NotesSidebar Notes={this.state.Notes} />
+                        <NotesSidebar
+                          Notes={this.state.Notes}
+                          LoggedIn={LoggedIn}
+
+                        />
                         <NotesContainer />
                       </Route>
                     </Switch>
