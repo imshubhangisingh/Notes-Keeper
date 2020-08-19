@@ -14,7 +14,15 @@ const NotesContainer = ({ Notes, DelNote, LoggedIn }) => {
 
   return (
     <div className="col-10">
-      {!isHome && Note ? <NoteContent DelNote={DelNote} Note={Note} LoggedIn={LoggedIn} /> : <NotesHome />}
+      {!isHome && Note ? (
+        <NoteContent
+          DelNote={DelNote}
+          Note={Note}
+          LoggedIn={LoggedIn}
+        />
+      ) : (
+          <NotesHome />
+        )}
     </div>
   )
 }

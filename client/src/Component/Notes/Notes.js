@@ -27,10 +27,10 @@ class Notes extends Component {
               Notes: res.data
             });
           }
-        })
+        });
       }
-    })
-  }
+    });
+  };
   render() {
     const { LoggedIn, Logout } = this.props;
     return (

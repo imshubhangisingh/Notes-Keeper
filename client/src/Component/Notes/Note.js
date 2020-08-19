@@ -15,14 +15,15 @@ const NoteContent = ({ Note, DelNote, LoggedIn }) => {
       className={"NotesContainer-Content" + (Note.private ? " private" : "")}>
       <header>
         <h3>
-          {Note.title}
           {Note.username === LoggedIn.username && (
             <button
-              className="btn btn-sm btn-danger float-right" onClick={handelDelete}
+              className="btn btn-sm btn-danger float-right"
+              onClick={handelDelete}
             >
               Delete
-            </button>)}
-
+            </button>
+          )}
+          {Note.title}
         </h3>
         <div className="Author">
           <p>Written by <em>{Note.username}</em> on <em>{Moment(Note.createdAt).format("MMMM Do YYYY, h:mm a")}</em>.
