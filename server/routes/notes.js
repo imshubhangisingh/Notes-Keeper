@@ -129,11 +129,11 @@ app.post("/:noteId", (req, res) => {
 // Delete particular note.
 app.delete("/:noteId", (req, res) => {
   const noteId = +req.params.noteId;
-  if (!notes[noteId] || !notes[noteId].username) {
+  if (!GetNoteById(noteId) || !GetNoteById(noteId).username) {
     res.status(404).json("Note doesn't exist.");
-  } else if (notes[noteId].username !== req.session.User.username) {
-    //Access to others' notes not provide!
-    res.status(403).json("You don't have access to delete this note.");
+  } else if (GetNoteById(noteId).username !== req.session.User.username) {
+    // Don't give access to others' notes!
+    res.status(403).json("You don't have access to edit or delete this note.");
   } else {
     notes[noteId] = {
       username: null,
