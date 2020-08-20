@@ -8,7 +8,6 @@ const WelcomeHeader = ({ LoggedIn, Logout }) => {
         </span>
 
       <div className="btn-group float-right">
-        <button className="btn btn-success btn-sm">New Note</button>
         <button className="btn btn-danger btn-sm " onClick={Logout}>Logout
       </button>
       </div>
