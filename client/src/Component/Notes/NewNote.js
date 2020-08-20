@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import MDEditor from "@uiw/react-md-editor";
-
-const NewNote = ({ LoggedIn, CreateNote }) => {
+import { withRouter } from "react-router-dom";
+const NewNote = ({ LoggedIn, CreateNote, history }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("*Start writing your note...*");
   const [priv, setPriv] = useState(false);
+  const [Saved, setSaved] = useState(false);
+
   const handleCreateNote = e => {
     e.preventDefault();
     CreateNote({
@@ -12,7 +14,11 @@ const NewNote = ({ LoggedIn, CreateNote }) => {
       content,
       private: priv
     });
+    setSaved(true);
   };
+  if (Saved) {
+    history.push("/");
+  }
   return (
     <section className={"NotesContainer-Content" + (priv ? " private" : "")}>
       <header>
@@ -51,5 +57,4 @@ const NewNote = ({ LoggedIn, CreateNote }) => {
     </section>
   );
 };
-
-export default NewNote;
+export default withRouter(NewNote);
